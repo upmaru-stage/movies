@@ -34,8 +34,8 @@
           github_id: 'nuxt/movies',
         }"
       >
-        <a href="https://vercel.com" rel="noopener" target="_blank" aria-label="go to vercel">
-          <IconVercel alt="Vercel" />
+        <a href="https://instellar.app" rel="noopener" target="_blank" aria-label="go to instellar">
+          deployed with instellar.app
         </a>
       </ExternalLinks>
     </div>
