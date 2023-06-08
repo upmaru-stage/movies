@@ -45,4 +45,4 @@ hook:
 
   post-deinstall: |
     rc-service movies stop
-    rc-update del rdio
+    rc-update del movies
