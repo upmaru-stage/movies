@@ -1,11 +1,10 @@
 dependencies:
-  trace: true
   build:
-    - nodejs
+    - nodejs-current
     - npm
     - vips-dev
   runtime:
-    - nodejs
+    - nodejs-current
     - npm
     - bash
     - curl
@@ -14,35 +13,33 @@ dependencies:
     - ca-certificates
     - icu-data-full
     - movies-openrc
+  trace: true
 
-stack: alpine/3.17
+stack: alpine/3.18
 
 build:
-  destinations: 
-    - '.output'
   command: |
     npm install
     npm run build
+  destinations:
+    - .output
 
-run: 
+run:
   name: movies
   services:
-  - name: web
-    binary: node
-    path: /usr/bin
-    start:
-      call: '.output/server/index.mjs'
+    - binary: node
+      name: web
+      path: /usr/bin
+      start:
+        call: .output/server/index.mjs
 
 hook:
-  post-install: |
-    rc-update add movies
-
-  pre-upgrade: |
-    rc-service movies stop
-
-  post-upgrade: |
-    rc-service movies start
-
   post-deinstall: |
     rc-service movies stop
     rc-update del movies
+  post-install: |
+    rc-update add movies
+  post-upgrade: |
+    rc-service movies start
+  pre-upgrade: |
+    rc-service movies stop
